@@ -8,14 +8,14 @@
   - [Deploying Models to Production](#deploying-models-to-production)
   - [Visualization, Monitoring, and Logging](#visualization-monitoring-and-logging)
 - [End-to-End Use-Case Applications](#end-to-end-use-case-applications)
-  
+
   Pre-deployed demos &mdash;
   - [Natural language processing (NLP)](demos/nlp/nlp-example.ipynb)
   - [Stream enrichment](demos/stream-enrich/stream-enrich.ipynb)
   - [Smart stock trading](demos/stocks/01-gen-demo-data.ipynb)
   - [Location-based recommendations](demos/location-based-recommendations/01-generate-stores-and-customers.ipynb)
   - [Real-time-user-segmentation](demos/slots-stream/real-time-user-segmentation.ipynb)
-  
+
   Additional demos (see the [download instructions](#mlrun-demos-download)) &mdash;
   - [XGBoost classification](demos/xgboost/train-xgboost-serverless.ipynb)
   - [LightGBM classification](demos/lightgbm/README.md)
@@ -59,8 +59,9 @@ For a more in-depth introduction to the platform, see the following resources:
 
 - [Components, Services, and Development Ecosystem](https://www.iguazio.com/docs/intro/latest-release/ecosystem)
 - [Introduction video](https://www.youtube.com/watch?v=hR_Hv0_WcUw)
-- [Unique data-layer architecture](https://www.iguazio.com/docs/intro/latest-release/architecture/)
 - [Creating and deploying Nuclio functions with Python and Jupyter Notebook](https://github.com/nuclio/nuclio-jupyter/blob/master/README.md)
+<!-- [c-arch-page-update] IG-14804 TODO: When the doc architecture page is updated, return this link after the intro video: -->
+<!-- - [Unique data-layer architecture](https://www.iguazio.com/docs/intro/latest-release/architecture/) -->
 
 A good place to start your development is with the platform [tutorial Jupyter notebooks](https://github.com/v3io/tutorials), which are available in the home directory of the platform's Jupyter Notebook service; see especially the [getting-started examples](getting-started/collect-n-explore.ipynb) and full [use-case demo applications](demos/README.ipynb).
 You can find a tutorials overview in the [Jupyter Notebook Basics](#jupyter-notebook-basics) section of this document.
@@ -123,7 +124,7 @@ For more information and examples of data exploration with the platform, see the
 
 You can develop and test data science models in the platform's Jupyter Notebook service or in your preferred external editor.
 When your model is ready, you can train it in Jupyter Notebook or by using scalable cluster resources such as Nuclio functions, Dask, Spark ML, or Kubernetes jobs.
-You can find model-training examples in the platform's tutorial Jupyter notebooks:
+You can find model-training examples in the MLRun demos tutorial Jupyter notebooks (see the [download instructions](#mlrun-demos-download)):
 
 - The [NetOps demo](demos/netops/03-training.ipynb) tutorial demonstrates predictive infrastructure-monitoring using scikit-learn.
 - The [image-classification demo](demos/image-classification/01-image-classification.ipynb) tutorial demonstrates image recognition using TensorFlow and Horovod with MLRun.
@@ -154,7 +155,7 @@ For detailed information about Nuclio, visit the [Nuclio web site](https://nucli
 > **Note:** Nuclio functions aren't limited to model serving: they can automate data collection, serve custom APIs, build real-time feature vectors, drive triggers, and more.
 
 For an overview of Nuclio and how to develop, document, and deploy serverless Python Nuclio functions from Jupyter Notebook, see the [nuclio-jupyter documentation](https://github.com/nuclio/nuclio-jupyter/blob/master/README.md).
-You can also find examples in the platform tutorial Jupyter notebooks; for example, the [NetOps demo](demos/netops/04-infer.ipynb) tutorial demonstrates how to deploy a network-operations model as a function.
+You can also find examples in the platform tutorial Jupyter notebooks; for example, the [NetOps demo](demos/netops/04-infer.ipynb) tutorial demonstrates how to deploy a network-operations model as a function; (see [End-to-End Use-Case Applications](#mlrun-demos-download) for demo download instructions).
 
 <a id="visualization-monitoring-and-logging"></a>
 ### Visualization, Monitoring, and Logging
@@ -225,7 +226,7 @@ The home directory of the platform's Jupyter Notebook service contains the follo
 
   - **welcome.ipynb** / [**README.md**](../README.md) &mdash; the current document, which provides a short introduction to the platform and how to use it to implement a full data science workflow.
   - [**getting-started**]() &mdash; a directory containing getting-started tutorials that explain and demonstrate how to perform different platform operations using the platform APIs and integrated tools.
-  - [**demos**](demos/README.ipynb) &mdash; a directory containing [end-to-end application use-case demos](#end-to-end-use-case-applications).
+  - [**demos**](demos/README.ipynb) &mdash; a directory containing [end-to-end use-case application demos](#end-to-end-use-case-applications).
   - Scripts and related notebooks for [updating the tutorial notebooks](#update-notebooks) and [downloading additional demo applications](#mlrun-demos-download).
 
 For information about the predefined data containers and how to reference data in these containers, see [Platform Data Containers](getting-started/collect-n-explore.ipynb/#platform-data-containers) in the [**getting-started-basic**](getting-started/getting-started-basic.ipynb) tutorial notebook.
@@ -235,7 +236,7 @@ For information about the predefined data containers and how to reference data i
 
 A virtual environment is a named, isolated, working copy of Python that maintains its own files, directories, and paths so that you can work with specific versions of libraries or Python itself without affecting other Python projects.
 Virtual environments make it easy to cleanly separate projects and avoid problems with different dependencies and version requirements across components.
-See the [virutal-env](getting-started/virutal-env.ipynb) tutorial notebook for step-by-step instructions for using conda to create your own Python virtual environments, which will appear as custom kernels in Jupyter Notebook.
+See the [virtual-env](getting-started/virtual-env.ipynb) tutorial notebook for step-by-step instructions for using Conda to create your own Python virtual environments, which will appear as custom kernels in Jupyter Notebook.
 
 <a id="update-notebooks"></a>
 ### Updating the Tutorial Notebooks to the Latest Version
@@ -253,8 +254,8 @@ For details, see the [**update-tutorials.ipynb**](update-tutorials.ipynb) notebo
 - [Components, Services, and Development Ecosystem](https://www.iguazio.com/docs/intro/latest-release/ecosystem/)
 - [Iguazio sample data-set](http://iguazio-sample-data.s3.amazonaws.com/) public Amazon S3 bucket
 
- <a id="third-party-resources"></a>
- ### Third-Party Documentation, Examples, and Sample Data Sets
+<a id="third-party-resources"></a>
+### Third-Party Documentation, Examples, and Sample Data Sets
 
 - [10 Minutes to pandas](https://pandas.pydata.org/pandas-docs/stable/10min.html)
 - [JupyterLab Tutorial](https://jupyterlab.readthedocs.io/en/stable/)
