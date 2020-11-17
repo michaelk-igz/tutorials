@@ -1,4 +1,4 @@
-# Model Deployment with Streaming
+# Model Deployment Pipeline
 
 This demo shows how to deploy a model with streaming information.
 
@@ -12,28 +12,25 @@ The importance of 1<sup>st</sup>-day churn prediction:
 
 This demo is comprised of several steps:
 
-![Model deployment with streaming Real-time operational Pipeline](../../assets/images/model-deployment-with-streaming.png)
+![Model deployment Pipeline Real-time operational Pipeline](assets/model-deployment-pipeline.png)
 
 While this demo covers the use case of 1<sup>st</sup>-day churn, it is easy to replace the data, related features and training model and reuse the same workflow for different business cases.
 
-These steps are covered by the following notebooks:
+These steps are covered by the following pipeline:
 
-- [**0. Setup**](0-setup.ipynb) - Creates the project and the relevant streams.
-- [**1. Event generator**](1-event-generator.ipynb) — Generates events for the training and serving. 
-- [**2. incoming event handler**](2-incoming-event-handler.ipynb) - Receive data from the input. This is a common input stream for all the data. This way, one can easily replace the event source data (in this case we have a data generator) without affecting the rest of this flow.
-- [**2a. Stream to parquet**](2a-stream-to-parquet.ipynb) - Store all incoming data to parquet files.
-- [**3a. Enrichment table**](3a-enrichment-table.ipynb) - Create an enrichment table (lookup values).
-- [**3b. Enrich stream**](3b-enrich-stream.ipynb) - Enrich the stream using the enrichment table.
-- [**4. Stream to features**](4-stream-to-features.ipynb) - Update aggregation features using the incoming event handler.
-- [**5. Serving**](5-serving.ipynb) - Serve the model and process the data from the enriched stream and aggregation features.
+- [**1. Data generator**](functions/data-generator.ipynb) — Generates events for the training and serving and Create an enrichment table (lookup values). 
+- [**2. Event handler**](functions/event-handler.ipynb) - Receive data from the input. This is a common input stream for all the data. This way, one can easily replace the event source data (in this case we have a data generator) without affecting the rest of this flow. It also store all incoming data to parquet files.
+- [**3. Stream to features**](functions/stream-to-features.ipynb) - Enrich the stream using the enrichment table and Update aggregation features using the incoming event handler.
+- [**4. Serving**](https://github.com/mlrun/functions/tree/master/model_server) - Serve the model and process the data from the enriched stream and aggregation features.
+- [**5. Inference logger**](functions/event-handler.ipynb) - We use the same event handler function from above but only its capability to store incoming data to parquet files.
 
-This demo comes with a pre-trained model using the base features, enrichment data and derived features, calculated using the same generated data. You can retrain the model or train a new model by opening and running the  [**4b. optional training notebook**](4b-optional-training.ipynb). You will need to ensure enough data is collected via the streams to the data storage in order to train a new model.
+This demo comes with a pre-trained model using the base features, enrichment data and derived features, calculated using the same generated data. You can retrain the model or train a new model by opening and running the  [**optional training notebook**](functions/optional-training.ipynb). You will need to ensure enough data is collected via the streams to the data storage in order to train a new model.
 
 ## About this demo
 
 ### Input Data
 
-The event generator ([1-event-generator.ipynb](1-event-generator.ipynb)) creates the following events: `new_registration`, `new_purchases`, `new_bet` and `new_win` with the following data:
+The data generator ([data-generator.ipynb](functions/-generator.ipynb)) creates the following events: `new_registration`, `new_purchases`, `new_bet` and `new_win` with the following data:
 
 | new_registration |   | new_purchases |   | new_bet    |   | new_win    |
 |------------------|---|---------------|---|------------|---|------------|
@@ -53,11 +50,11 @@ Furthermore, `new_registration` includes a `label` column to indicate whether or
 
 ## Enrichment
 
-The enrichment table ([3a-enrichment-table.ipynb](3a-enrichment-table.ipynb)) contains a lookup of postcode and returns a socioeconomic index (`socioeconomic_idx`). The enriched stream contains the original data and the enriched data.
+The same data generator ([data-generator.ipynb](functions/-generator.ipynb)) also creates the enrichment table which contains a lookup of postcode and returns a socioeconomic index (`socioeconomic_idx`).
 
 ## Feature calculation
 
-During the feature calculation ([4-stream-to-features.ipynb](4-stream-to-features.ipynb)), we calculate sum, mean, count and variance for the 3 amount fields (`amount`, `bet_amount` and `win_amount` for `new_purchases`, `new_bet` and `new_win` respectively). This results with the following list of fields:
+During the feature calculation ([stream-to-features.ipynb](functions/stream-to-features.ipynb)), enriches the events using the enrichment table and calculates sum, mean, count and variance for the 3 amount fields (`amount`, `bet_amount` and `win_amount` for `new_purchases`, `new_bet` and `new_win` respectively). This results with the following list of fields:
 
 - purchase_sum
 - purchase_mean
@@ -71,4 +68,3 @@ During the feature calculation ([4-stream-to-features.ipynb](4-stream-to-feature
 - win_mean
 - win_count
 - win_var
-
